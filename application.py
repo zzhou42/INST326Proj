@@ -33,9 +33,19 @@ class Application(tk.Frame):
         self.quitButton = tk.Button(self, text='Quit', command = add_number)
         self.quitButton.grid()
 
+def present_contact(self):
+    self.numberLabel.config(text = return_contact_name)
+    
+class ContactBook:
+    def return_contact_name(self):
+        # theres a whole process where we have to pass in some value and return a name based on what we pass in
+        
+        return "Name"
+
 def add_number():
     print(5)
 
+if __name__ == '__main__':
 app = Application()
 app.master.title('Sample application')
 app.mainloop()
