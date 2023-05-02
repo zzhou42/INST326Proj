@@ -15,6 +15,49 @@ They would have all their contact information with a click of a few buttons.
 
 Challenges Encountered: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
+""" Classes We may use  """
+
+class Contact:
+    def __init__(self, first_name, last_name, phone_number, email):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.phone_number = phone_number
+        self.email = email
+
+
+class Login:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+        self.contact_list = ContactList()
+
+        
+class ContactList: #Address Book
+    def __init__(self, contact=None):
+        self.contacts = []
+        if contact is not None: # So No Empty Contacts Allowed
+            self.contacts.append(contact)
+            
+    def add_contact(self, contact):
+        self.contacts.append(contact)
+        
+    def delete_contact(self, contact):
+        self.contacts.remove(contact)
+
+
+class login_list: #Saves Login information
+    def __init__(self, login=None):
+        self.logins = []
+        if login is not None:
+            self.logins.append(login)
+            
+    def add_login(self, login):
+        self.logins.append(login)
+        
+    def delete_login(self, login):
+        self.logins.remove(login)
+
+
 import tkinter as tk
 
 class Application(tk.Frame):
@@ -46,6 +89,6 @@ def add_number():
     print(5)
 
 if __name__ == '__main__':
-app = Application()
-app.master.title('Sample application')
-app.mainloop()
+    app = Application()
+    app.master.title('Sample application')
+    app.mainloop()
