@@ -28,11 +28,14 @@ and testing the limits of tkinter.
 - Figure out how to properly use Toplevel() function, or ways to open up multiple
 windows and better organize them or visualize them first
 
+- I like Chima's classes he made, Try to modify the GUI aspect of the code with
+Chima's classes that he created. Should discuss together.
+
 Code Version: 5.2.23 (Date Last Updated)
 
 """
-""" Classes We may use  """
-
+"""
+Start of Chima's edit---------------------------------------------------------"""
 class Contact:
     def __init__(self, first_name, last_name, phone_number, email):
         self.first_name = first_name
@@ -73,7 +76,11 @@ class login_list: #Saves Login information
     def delete_login(self, login):
         self.logins.remove(login)
 
+"""
+End of Chima's edit---------------------------------------------------------"""
 
+"""
+Start of Zhen's code--------------------------------------------------------"""
 import tkinter as tk
 from tkinter import messagebox
 
@@ -265,3 +272,7 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = StartWindow(root)
     app.run()
+
+
+"""
+End of Zhen's code--------------------------------------------------------"""
