@@ -31,6 +31,48 @@ windows and better organize them or visualize them first
 Code Version: 5.2.23 (Date Last Updated)
 
 """
+""" Classes We may use  """
+
+class Contact:
+    def __init__(self, first_name, last_name, phone_number, email):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.phone_number = phone_number
+        self.email = email
+
+
+class Login:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+        self.contact_list = ContactList()
+
+        
+class ContactList: #Address Book
+    def __init__(self, contact=None):
+        self.contacts = []
+        if contact is not None: # So No Empty Contacts Allowed
+            self.contacts.append(contact)
+            
+    def add_contact(self, contact):
+        self.contacts.append(contact)
+        
+    def delete_contact(self, contact):
+        self.contacts.remove(contact)
+
+
+class login_list: #Saves Login information
+    def __init__(self, login=None):
+        self.logins = []
+        if login is not None:
+            self.logins.append(login)
+            
+    def add_login(self, login):
+        self.logins.append(login)
+        
+    def delete_login(self, login):
+        self.logins.remove(login)
+
 
 import tkinter as tk
 from tkinter import messagebox
