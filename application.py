@@ -313,6 +313,7 @@ class ContactBook:
         contacts[len(contacts)+1] = [name,address,phone,email]
         write_file()
         
+class ContactListApp:
     def write_file():
         "Writes the contact details to a file"
         file = open("contact.txt","w")
