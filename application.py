@@ -279,72 +279,72 @@ End of Zhen's code--------------------------------------------------------"""
 """
 Start of Ken's code---------------------------------------------------------
 """
-class Contact:
-    def __init__(self, first_name, last_name, phone_number, email):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone_number = phone_number
-        self.email = email
+# class Contact:
+#     def __init__(self, first_name, last_name, phone_number, email):
+#         self.first_name = first_name
+#         self.last_name = last_name
+#         self.phone_number = phone_number
+#         self.email = email
 
-class ContactBook:
-    def __init__(self):
-        self.contacts = {}
+# class ContactBook:
+#     def __init__(self):
+#         self.contacts = {}
         
-    def display_menu():
-        "Displays the menu options"
-        print "---------- Contact Book ------------"
-        print "Add New Contact"
-        print "Display Contact book"
-        print "Search For Contact"
+#     def display_menu():
+#         "Displays the menu options"
+#         print "---------- Contact Book ------------"
+#         print "Add New Contact"
+#         print "Display Contact book"
+#         print "Search For Contact"
     
-    def search_contact(name):
-        "Searches for a given name and return 0 if not found"
-        for i in contacts:
-            if(contacts[i][0] == name):
-                return i
-            return 0
+#     def search_contact(name):
+#         "Searches for a given name and return 0 if not found"
+#         for i in contacts:
+#             if(contacts[i][0] == name):
+#                 return i
+#             return 0
         
-    def add_new_contact():
-        "Adds a new contact to the Contact book"
-        name = raw_input("Name:")
-        address = raw_input("Address:")
-        phone = raw_input("Phone:")
-        email = raw_input("Email:");
-        contacts[len(contacts)+1] = [name,address,phone,email]
-        write_file()
+#     def add_new_contact():
+#         "Adds a new contact to the Contact book"
+#         name = raw_input("Name:")
+#         address = raw_input("Address:")
+#         phone = raw_input("Phone:")
+#         email = raw_input("Email:");
+#         contacts[len(contacts)+1] = [name,address,phone,email]
+#         write_file()
         
-class ContactListApp:
-    def write_file():
-        "Writes the contact details to a file"
-        file = open("contact.txt","w")
-        for i in contacts:
-            file.write("\n".join(contacts[i]))
-            file.write("\n");
-            file.close();
+# class ContactListApp:
+#     def write_file():
+#         "Writes the contact details to a file"
+#         file = open("contact.txt","w")
+#         for i in contacts:
+#             file.write("\n".join(contacts[i]))
+#             file.write("\n");
+#             file.close();
     
-    def read_to_dict():
-        "Reads all the contact details to a dict"
-        file = open("contact.txt","r")
-        text = file.read()
-        textl = text.split("\n")
-        print textl
-        factor = 0
-        contact = []
-        for i in textl:
-            if(factor==4):
-                contacts[len(contacts)+1] = contact
-                contact = []
-                contact.append(i)
-                factor=1
-                else:
-                    contact.append(i)
-                    factor += 1
-                    file.close()
+#     def read_to_dict():
+#         "Reads all the contact details to a dict"
+#         file = open("contact.txt","r")
+#         text = file.read()
+#         textl = text.split("\n")
+#         print textl
+#         factor = 0
+#         contact = []
+#         for i in textl:
+#             if(factor==4):
+#                 contacts[len(contacts)+1] = contact
+#                 contact = []
+#                 contact.append(i)
+#                 factor=1
+#                 else:
+#                     contact.append(i)
+#                     factor += 1
+#                     file.close()
                     
-    if __name__ == "__main__":
+#     if __name__ == "__main__":
         
-        app = Main()
-        app.mainloop()
-"""
-End of Ken's code--------------------------------------------------------"""
-"""
+#         app = Main()
+#         app.mainloop()
+# """
+# End of Ken's code--------------------------------------------------------"""
+# """
