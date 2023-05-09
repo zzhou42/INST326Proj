@@ -36,45 +36,45 @@ Code Version: 5.2.23 (Date Last Updated)
 """
 """
 Start of Chima's edit---------------------------------------------------------"""
-class Contact:
-    def __init__(self, first_name, last_name, phone_number, email):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone_number = phone_number
-        self.email = email
+# class Contact:
+#     def __init__(self, first_name, last_name, phone_number, email):
+#         self.first_name = first_name
+#         self.last_name = last_name
+#         self.phone_number = phone_number
+#         self.email = email
 
 
-class Login:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.contact_list = ContactList()
+# class Login:
+#     def __init__(self, username, password):
+#         self.username = username
+#         self.password = password
+#         self.contact_list = ContactList()
 
         
-class ContactList: #Address Book
-    def __init__(self, contact=None):
-        self.contacts = []
-        if contact is not None: # So No Empty Contacts Allowed
-            self.contacts.append(contact)
+# class ContactList: #Address Book
+#     def __init__(self, contact=None):
+#         self.contacts = []
+#         if contact is not None: # So No Empty Contacts Allowed
+#             self.contacts.append(contact)
             
-    def add_contact(self, contact):
-        self.contacts.append(contact)
+#     def add_contact(self, contact):
+#         self.contacts.append(contact)
         
-    def delete_contact(self, contact):
-        self.contacts.remove(contact)
+#     def delete_contact(self, contact):
+#         self.contacts.remove(contact)
 
 
-class login_list: #Saves Login information
-    def __init__(self, login=None):
-        self.logins = []
-        if login is not None:
-            self.logins.append(login)
+# class login_list: #Saves Login information
+#     def __init__(self, login=None):
+#         self.logins = []
+#         if login is not None:
+#             self.logins.append(login)
             
-    def add_login(self, login):
-        self.logins.append(login)
+#     def add_login(self, login):
+#         self.logins.append(login)
         
-    def delete_login(self, login):
-        self.logins.remove(login)
+#     def delete_login(self, login):
+#         self.logins.remove(login)
 
 """
 End of Chima's edit---------------------------------------------------------"""
@@ -140,6 +140,7 @@ class StartWindow:
         if username in login_list:
             if password == login_list[username]:
                 ContactListApp(root)
+                ContactList()
             else:
                 messagebox.showerror("Error", "Invalid password")
         else:
@@ -197,6 +198,8 @@ class ContactListApp:
 
         self.show_contacts_button = tk.Button(self.contacts_frame, text="Show Contacts", command=self.show_contacts)
         self.show_contacts_button.pack()
+    
+
 
     def add_contact(self):
         add_contact_window = tk.Toplevel(self.root)
@@ -251,19 +254,30 @@ class ContactListApp:
 
         remove_button = tk.Button(remove_contact_window, text="Remove", command=remove)
         remove_button.pack()
-
+   
+  
+   
     def show_contacts(self):
-        show_contacts_window = tk.Toplevel(self.root)
-        show_contacts_window.title("Contacts")
-
         contacts = self.contact_list.get_all_contacts()
 
-        contacts_listbox = tk.Listbox(show_contacts_window)
-        contacts_listbox.pack()
+        if not contacts:
+            messagebox.showinfo("Contact List", "No contacts to show")
+            return
+
+        show_contacts_window = tk.Toplevel(self.root)
+        show_contacts_window.title("Contact List")
+
+        listbox = tk.Listbox(show_contacts_window, width=70)
+        listbox.pack(padx=10, pady=10)
+
+        listbox.insert(tk.END, f"{'First Name':<15}{'Last Name':<15}{'Phone Number':<15}{'Email':<30}")
+        listbox.insert(tk.END, "-" * 75)
 
         for contact in contacts:
-            contact_info = f"Name: {contact.first_name} {contact.last_name}\nPhone: {contact.phone_number}\nEmail: {contact.email}\n"
-            contacts_listbox.insert(tk.END, contact_info)
+            listbox.insert(tk.END, f"{contact.first_name:<15}{contact.last_name:<15}{contact.phone_number:<15}{contact.email:<30}")
+
+        listbox.configure(state="disabled")
+
 
     def run(self):
         self.root.mainloop()
