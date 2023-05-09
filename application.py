@@ -19,7 +19,7 @@ buttons. Find a way to not let that happen, either create a separate window
 for the ContactListApp, or prevent the use of login button when sucessfully
 logged in.
 - Fix and polish up the ContactListApp, the show_contacts() function needs to be
-polished. The printed out contacts list needs to be readable.
+polished. The printed out contacts list needs to be readable.  COMPLETED
 - Connect a separate contact list per login user. So if we have 3 users logins
 we need 3 separate contact list. We can ditch this if it is too complicated.
 Probably talk to TA or Professor about this.
@@ -31,56 +31,14 @@ windows and better organize them or visualize them first
 - I like Chima's classes he made, Try to modify the GUI aspect of the code with
 Chima's classes that he created. Should discuss together.
 
-Code Version: 5.2.23 (Date Last Updated)
+Code Version: 5.9.23 (Date Last Updated)
+
+- Lets contribuite soley on the Main Code instead of making our own versions
+We Also need to implement a way for users to log out and log in using same username and password without destroying application.
 
 """
 """
-Start of Chima's edit---------------------------------------------------------"""
-# class Contact:
-#     def __init__(self, first_name, last_name, phone_number, email):
-#         self.first_name = first_name
-#         self.last_name = last_name
-#         self.phone_number = phone_number
-#         self.email = email
-
-
-# class Login:
-#     def __init__(self, username, password):
-#         self.username = username
-#         self.password = password
-#         self.contact_list = ContactList()
-
-        
-# class ContactList: #Address Book
-#     def __init__(self, contact=None):
-#         self.contacts = []
-#         if contact is not None: # So No Empty Contacts Allowed
-#             self.contacts.append(contact)
-            
-#     def add_contact(self, contact):
-#         self.contacts.append(contact)
-        
-#     def delete_contact(self, contact):
-#         self.contacts.remove(contact)
-
-
-# class login_list: #Saves Login information
-#     def __init__(self, login=None):
-#         self.logins = []
-#         if login is not None:
-#             self.logins.append(login)
-            
-#     def add_login(self, login):
-#         self.logins.append(login)
-        
-#     def delete_login(self, login):
-#         self.logins.remove(login)
-
-"""
-End of Chima's edit---------------------------------------------------------"""
-
-"""
-Start of Zhen's code--------------------------------------------------------"""
+Start of Main Code"""
 import tkinter as tk
 from tkinter import messagebox
 
