@@ -321,30 +321,12 @@ Start of Ken's code---------------------------------------------------------
 #             file.write("\n".join(contacts[i]))
 #             file.write("\n");
 #             file.close();
-    
-#     def read_to_dict():
-#         "Reads all the contact details to a dict"
-#         file = open("contact.txt","r")
-#         text = file.read()
-#         textl = text.split("\n")
-#         print textl
-#         factor = 0
-#         contact = []
-#         for i in textl:
-#             if(factor==4):
-#                 contacts[len(contacts)+1] = contact
-#                 contact = []
-#                 contact.append(i)
-#                 factor=1
-#                 else:
-#                     contact.append(i)
-#                     factor += 1
-#                     file.close()
-                    
-#     if __name__ == "__main__":
-        
-#         app = Main()
-#         app.mainloop()
+#     def logout(self):
+#       self.session['Logged out!'] = {
+#        'Logged out!': False
+#        }
+#        return self('Return to Home Screen')
+                  
 # """
 # End of Ken's code--------------------------------------------------------"""
 # """
