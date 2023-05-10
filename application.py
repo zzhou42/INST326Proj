@@ -95,12 +95,24 @@ class StartWindow:
         username = self.username_entry.get()
         password = self.password_entry.get()
         
-        if username in login_list:
-            if password == login_list[username]:
-                ContactListApp(root)
-                ContactList()
-            else:
-                messagebox.showerror("Error", "Invalid password")
+        path = "login_list.txt"
+        
+        def login_checker(path, username, password):
+            with open(path, 'r') as login_list:
+                login_list_content = login_list.read()
+                users = login_list_content.split("End Login\n")
+                for user in users:
+                    lines = user.strip().split("\n")
+                    if len(lines) >= 2:
+                        existing_username = lines[0].split(":")[1].strip()
+                        existing_password = lines[1].split(":")[1].strip()
+                        if existing_username == username and existing_password == password:
+                            return True  # Username and password match
+                return False  # Username or password does not match
+            
+        if login_checker(path, username, password) == True:
+            ContactListApp(root)
+            ContactList()
         else:
             messagebox.showerror("Error", "Invalid username or password")
             
@@ -120,13 +132,29 @@ class StartWindow:
         
         self.password_signup_entry = tk.Entry(self.signup_window, show="*")
         self.password_signup_entry.pack()
-                
+        
+        def login_checker(path, user):
+            with open(path, 'r') as login_list:
+                for line in login_list:
+                    if line.startswith("Username:"):
+                        existing_username = line.split(":")[1].strip()
+                    if existing_username == user:
+                        return False
+                return True
+            
         def signup_save():
             username = self.username_signup_entry.get()
             password = self.password_signup_entry.get()
+            
+            path = 'login_list.txt'
         
-            if username not in login_list:
-                login_list[username] = password
+            if login_checker(path, username) == True:
+                user = {"username": username, "password": password}
+    
+                with open(path, 'a') as login_list:
+                    login_list.write(f"Username: {user['username']}\n")
+                    login_list.write(f"Password: {user['password']}\n")
+                    login_list.write("End Login\n")
             else:
                 messagebox.showerror("Error", "Username already exist")
                 
