@@ -65,13 +65,10 @@ class ContactList:
     def get_all_contacts(self):
         return self.contacts.values()
     
-login_list = {"admin":"password"}
-
 class StartWindow:
     def __init__(self, login_root):
         self.login_root = login_root
         self.login_root.geometry("300x400")
-        self.login_list = login_list
         
         self.login_frame = tk.Frame(self.login_root)
         self.login_frame.pack()
@@ -276,5 +273,4 @@ if __name__ == "__main__":
 
 """
 End of Main code--------------------------------------------------------"""
-"""
 
