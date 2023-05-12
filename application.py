@@ -95,6 +95,7 @@ class StartWindow:
         username = self.username_entry.get()
         password = self.password_entry.get()
         
+        #print(username)
         path = "login_list.txt"
         
         def login_checker(path, username, password):
@@ -115,6 +116,11 @@ class StartWindow:
             ContactList()
         else:
             messagebox.showerror("Error", "Invalid username or password")
+        
+    def get_user(self):
+        
+        username = self.username_entry.get()
+        return username
             
     def signup(self):
         self.signup_window = tk.Toplevel()
@@ -218,6 +224,18 @@ class ContactListApp:
             email = email_entry.get()
             contact = Contact(first_name, last_name, phone_number, email)
             self.contact_list.add_contact(contact)
+            
+            
+            owner = StartWindow.get_user
+            
+            path = 'login_list.txt'
+            with open(path, 'a') as contact_list_txt:
+                contact_list_txt.write(f"Contact of {owner} -- First Name: {first_name}\n")
+                contact_list_txt.write(f"Last Name: {last_name}\n")
+                contact_list_txt.write(f"Phone Number: {phone_number}\n")
+                contact_list_txt.write(f"Email: {email}\n")
+                contact_list_txt.write("End Contact\n")
+            
             messagebox.showinfo("Add Contact", "Contact added successfully")
             add_contact_window.destroy()
 
