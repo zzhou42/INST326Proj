@@ -227,7 +227,7 @@ class ContactListApp:
             self.contact_list.add_contact(contact)
             
             
-            owner = StartWindow.get_user
+            owner = username
             
             path = 'login_list.txt'
             with open(path, 'a') as contact_list_txt:
@@ -265,6 +265,27 @@ class ContactListApp:
    
     def show_contacts(self):
         contacts = self.contact_list.get_all_contacts()
+        
+        #path = 'login_list.txt'
+        
+        #def owner_check(path, username):
+        #    contacts = []
+        #    with open(path, 'r') as contact_list:
+        #        contact_content = contact_list.read()
+        #        contact_entries = contact_content.split("End Contact\n")
+        #        for contact in contact_entries:
+        #            if f"Contact of {username}" in contact:
+        #                lines = contact.strip().split("\n")
+        #                contact = {}
+        #                for line in lines:
+        #                    if ":" in line:
+        #                       key, value = line.split(":")
+        #                       contact[key.strip()] = value.strip()
+        #                contacts.append(contact)
+        #    print(contacts)
+        #    return contacts
+        
+        #contacts = owner_check(path, username)
 
         if not contacts:
             messagebox.showinfo("Contact List", "No contacts to show")
