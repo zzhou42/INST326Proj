@@ -27,14 +27,17 @@ Probably talk to TA or Professor about this.
 and testing the limits of tkinter.
 - Figure out how to properly use Toplevel() function, or ways to open up multiple
 windows and better organize them or visualize them first
-
 - I like Chima's classes he made, Try to modify the GUI aspect of the code with
 Chima's classes that he created. Should discuss together.
 
-Code Version: 5.9.23 (Date Last Updated)
+5.11.23 Update
+- Realized that our contacts were not being saved to the user even though we had
+the logins of users saved. Need to figure out a way to implement this
+
+Code Version: 5.11.23 (Date Last Updated)
 
 - Lets contribuite soley on the Main Code instead of making our own versions
-We Also need to implement a way for users to log out and log in using same username and password without destroying application.
+We also need to implement a way for users to log out and log in using same username and password without destroying application.
 
 """
 """
@@ -48,6 +51,18 @@ class Contact:
         self.last_name = last_name
         self.phone_number = phone_number
         self.email = email
+        
+    def get_first_name(self):
+        return self.first_name
+    
+    def get_last_name(self):
+        return self.last_name
+    
+    def get_phone(self):
+        return self.phone_number
+    
+    def get_email(self):
+        return self.email
 
 class ContactList:
     def __init__(self):
@@ -64,34 +79,32 @@ class ContactList:
 
     def get_all_contacts(self):
         return self.contacts.values()
-    
-login_list = {"admin":"password"}
 
-class StartWindow:
-    def __init__(self, login_root):
-        self.login_root = login_root
-        self.login_root.geometry("300x400")
-        self.login_list = login_list
+class ContactListApp:
         
-        self.login_frame = tk.Frame(self.login_root)
-        self.login_frame.pack()
+    def __init__(self, root):
+        self.root = root
+        self.root.geometry("300x200")
+        self.root.title('Contact List App')
+        self.contact_list = ContactList()
 
-        self.signup_frame = tk.Frame(self.login_root)
-        self.signup_frame.pack()
-        
-        self.login_button = tk.Button(self.login_frame, text="Login", command=self.login)
-        self.login_button.pack()
+        self.frame = tk.Frame(root)
+        self.frame.pack()
 
-        self.signup_button = tk.Button(self.signup_frame, text="Signup", command=self.signup)
-        self.signup_button.pack()
-
-        self.username_entry = tk.Entry(self.login_frame)
+        tk.Label(self.frame, text="Username").pack()
+        self.username_entry = tk.Entry(self.frame)
         self.username_entry.pack()
 
-        self.password_entry = tk.Entry(self.login_frame)
+        tk.Label(self.frame, text="Password").pack()
+        self.password_entry = tk.Entry(self.frame)
         self.password_entry.pack()
         
+        tk.Button(self.frame, text="Login", command=self.login).pack()
+        tk.Button(self.frame, text="Signup", command=self.signup).pack()
+    
     def login(self):
+        global username
+        global password
         username = self.username_entry.get()
         password = self.password_entry.get()
         
@@ -112,8 +125,19 @@ class StartWindow:
                 return False  # Username or password does not match
             
         if login_checker(path, username, password) == True:
-            ContactListApp(root)
-            ContactList()
+            self.frame.destroy()
+            
+            self.contacts_frame = tk.Frame(self.root)
+            self.contacts_frame.pack()
+
+            self.add_contact_button = tk.Button(self.contacts_frame, text="Add Contact", command=self.add_contact)
+            self.add_contact_button.pack()
+
+            self.remove_contact_button = tk.Button(self.contacts_frame, text="Remove Contact", command=self.remove_contact)
+            self.remove_contact_button.pack()
+
+            self.show_contacts_button = tk.Button(self.contacts_frame, text="Show Contacts", command=self.show_contacts)
+            self.show_contacts_button.pack()
         else:
             messagebox.showerror("Error", "Invalid username or password")
         
@@ -124,17 +148,15 @@ class StartWindow:
             
     def signup(self):
         self.signup_window = tk.Toplevel()
-        self.signup_window.geometry("300x500")
+        self.signup_window.geometry("300x200")
         self.signup_window.title("Signup")
         
-        self.username_signup_label = tk.Label(self.signup_window, text="Username")
-        self.username_signup_label.pack()
+        tk.Label(self.signup_window, text="Username").pack()
         
         self.username_signup_entry = tk.Entry(self.signup_window)
         self.username_signup_entry.pack()
         
-        self.password_signup_label = tk.Label(self.signup_window, text="Password")
-        self.password_signup_label.pack()
+        tk.Label(self.signup_window, text="Password").pack()
         
         self.password_signup_entry = tk.Entry(self.signup_window, show="*")
         self.password_signup_entry.pack()
@@ -166,36 +188,15 @@ class StartWindow:
                 
             self.signup_window.destroy()
                 
-        self.signup_done_button = tk.Button(self.signup_window, text="Done", command=signup_save)
-        self.signup_done_button.pack()
+        tk.Button(self.signup_window, text="Done", command=signup_save).pack()
 
     def run(self):
-        self.login_root.mainloop()
-
-class ContactListApp:
-    
-    def __init__(self, root):
-        self.root = root
-        self.root.geometry("800x800")
-        self.contact_list = ContactList()
-
-        self.contacts_frame = tk.Frame(self.root)
-        self.contacts_frame.pack()
-
-        self.add_contact_button = tk.Button(self.contacts_frame, text="Add Contact", command=self.add_contact)
-        self.add_contact_button.pack()
-
-        self.remove_contact_button = tk.Button(self.contacts_frame, text="Remove Contact", command=self.remove_contact)
-        self.remove_contact_button.pack()
-
-        self.show_contacts_button = tk.Button(self.contacts_frame, text="Show Contacts", command=self.show_contacts)
-        self.show_contacts_button.pack()
-    
-
+        self.root.mainloop()
 
     def add_contact(self):
         add_contact_window = tk.Toplevel(self.root)
         add_contact_window.title("Add Contact")
+        add_contact_window.geometry("300x300")
 
         first_name_label = tk.Label(add_contact_window, text="First Name:")
         first_name_label.pack()
@@ -245,6 +246,7 @@ class ContactListApp:
     def remove_contact(self):
         remove_contact_window = tk.Toplevel(self.root)
         remove_contact_window.title("Remove Contact")
+        remove_contact_window.geometry("300x200")
 
         first_name_label = tk.Label(remove_contact_window, text="First Name:")
         first_name_label.pack()
@@ -288,81 +290,10 @@ class ContactListApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = StartWindow(root)
+    app = ContactListApp(root)
     app.run()
 
 
 """
-End of Zhen's code--------------------------------------------------------"""
-"""
-Start of Ken's code---------------------------------------------------------
-"""
-# class Contact:
-#     def __init__(self, first_name, last_name, phone_number, email):
-#         self.first_name = first_name
-#         self.last_name = last_name
-#         self.phone_number = phone_number
-#         self.email = email
+End of Main code--------------------------------------------------------"""
 
-# class ContactBook:
-#     def __init__(self):
-#         self.contacts = {}
-        
-#     def display_menu():
-#         "Displays the menu options"
-#         print "---------- Contact Book ------------"
-#         print "Add New Contact"
-#         print "Display Contact book"
-#         print "Search For Contact"
-    
-#     def search_contact(name):
-#         "Searches for a given name and return 0 if not found"
-#         for i in contacts:
-#             if(contacts[i][0] == name):
-#                 return i
-#             return 0
-        
-#     def add_new_contact():
-#         "Adds a new contact to the Contact book"
-#         name = raw_input("Name:")
-#         address = raw_input("Address:")
-#         phone = raw_input("Phone:")
-#         email = raw_input("Email:");
-#         contacts[len(contacts)+1] = [name,address,phone,email]
-#         write_file()
-        
-# class ContactListApp:
-#     def write_file():
-#         "Writes the contact details to a file"
-#         file = open("contact.txt","w")
-#         for i in contacts:
-#             file.write("\n".join(contacts[i]))
-#             file.write("\n");
-#             file.close();
-    
-#     def read_to_dict():
-#         "Reads all the contact details to a dict"
-#         file = open("contact.txt","r")
-#         text = file.read()
-#         textl = text.split("\n")
-#         print textl
-#         factor = 0
-#         contact = []
-#         for i in textl:
-#             if(factor==4):
-#                 contacts[len(contacts)+1] = contact
-#                 contact = []
-#                 contact.append(i)
-#                 factor=1
-#                 else:
-#                     contact.append(i)
-#                     factor += 1
-#                     file.close()
-                    
-#     if __name__ == "__main__":
-        
-#         app = Main()
-#         app.mainloop()
-# """
-# End of Ken's code--------------------------------------------------------"""
-# """
