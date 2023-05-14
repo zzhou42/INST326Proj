@@ -290,7 +290,7 @@ class ContactListApp:
         tk.Button(self.signup_window, text="Done", command=signup_save).pack()
 
     def run(self):
-        """Runs the main function
+        """Lets the main function run
         """
         self.root.mainloop()
 
@@ -416,7 +416,7 @@ class ContactListApp:
 
 
     def run(self):
-        """Runs the main function
+        """Lets the main function run
         """
         self.root.mainloop()
 
