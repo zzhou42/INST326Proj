@@ -46,38 +46,96 @@ import tkinter as tk
 from tkinter import messagebox
 
 class Contact:
+    """A class which stores attributes relating to an Contact
+    
+    Attributes:
+            first_name (str): the first name of the person you're creating a contact for
+            last_name (str): the last name of the person you're creating a contact for
+            phone_number (str): the phone number  of the person you're creating a contact for
+            email (str): the email of the person you're creating a contact for
+    """
     def __init__(self, first_name, last_name, phone_number, email):
+        """Initializes an Contact object
+    
+            Attributes:
+                first_name (str): the first name of the person you're creating a contact for
+                last_name (str): the last name of the person you're creating a contact for
+                phone_number (str): the phone number  of the person you're creating a contact for
+                email (str): the email of the person you're creating a contact for
+        """
         self.first_name = first_name
         self.last_name = last_name
         self.phone_number = phone_number
         self.email = email
         
     def get_first_name(self):
+        """Represent the first name as a string
+        
+        Returns:
+            str: returns a representation of the first name
+        """
         return self.first_name
     
     def get_last_name(self):
+        """Represent the last name as a string
+        
+        Returns:
+            str: returns a representation of the last name
+        """
         return self.last_name
     
     def get_phone(self):
+        """Represent the phone number as a string
+        
+        Returns:
+            str: returns a representation of the phone number
+        """
         return self.phone_number
     
     def get_email(self):
+        """Represent the email as a string
+        
+        Returns:
+            str: returns a representation of the email
+        """
         return self.email
 
 class ContactList:
+     """A class which stores attributes relating to an Contact List  
+    """
     def __init__(self):
+        """Initializes an Contact List object
+    
+            Attributes:
+                list: define a dictionary in a list of contacts objects
+        """
         self.contacts = {}
 
     def add_contact(self, contact):
+        """Adding a contact to the Contact List 
+    
+            Attributes:
+                contact(str): the contact in which you are making
+        """
         self.contacts[contact.first_name] = contact
 
     def remove_contact(self, first_name):
+        """Removing a contact off the Contact List 
+    
+            Attributes:
+                first_name(str): the first name of the person you're creating a contact for
+        """
         if first_name in self.contacts:
             del self.contacts[first_name]
         else:
             messagebox.showerror("Contact not found", "Contact not found")
 
     def get_all_contacts(self):
+        """Represent all the contacts you've made 
+        
+        Returns:
+            str: returns a representation of the contacts
+        """
         return self.contacts.values()
 
 class ContactListApp:
