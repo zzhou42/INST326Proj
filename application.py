@@ -139,8 +139,18 @@ class ContactList:
         return self.contacts.values()
 
 class ContactListApp:
+     """A class which stores attributes relating to an Contact List App 
+    
+    Attributes:
+            root (str): the top level directory of the Contact List App 
+    """
         
     def __init__(self, root):
+        """Initializes an Contact List App object
+    
+            Attributes:
+                root (str): the top level directory of the Contact List App 
+        """
         self.root = root
         self.root.geometry("300x200")
         self.root.title('Contact List App')
@@ -161,6 +171,12 @@ class ContactListApp:
         tk.Button(self.frame, text="Signup", command=self.signup).pack()
     
     def login(self):
+        """The login screen in which the user is able to sign in 
+    
+            Attributes:
+                username(str): the username of the user 
+                password(str): the password of the user
+        """
         global username
         global password
         username = self.username_entry.get()
@@ -170,6 +186,13 @@ class ContactListApp:
         path = "login_list.txt"
         
         def login_checker(path, username, password):
+            """Checks to see if the username and password matches and if they match then allows user to log in
+    
+            Attributes:
+                path (str): the path of the file
+                username(str): the username of the user 
+                password(str): the password of the user
+            """
             with open(path, 'r') as login_list:
                 login_list_content = login_list.read()
                 users = login_list_content.split("End Login\n")
@@ -200,11 +223,21 @@ class ContactListApp:
             messagebox.showerror("Error", "Invalid username or password")
         
     def get_user(self):
+        """Gets the user their information 
+    
+            Returns:
+                username(str): returns a representation of the username
+        """
         
         username = self.username_entry.get()
         return username
             
     def signup(self):
+        """Lets the user sign up to make an account
+        
+        Returns:
+            str: returns a representation of the username
+        """
         self.signup_window = tk.Toplevel()
         self.signup_window.geometry("300x200")
         self.signup_window.title("Signup")
@@ -220,6 +253,12 @@ class ContactListApp:
         self.password_signup_entry.pack()
         
         def login_checker(path, user):
+            """Checks to see if the username and password matches and if they match then allows user to log in
+    
+            Attributes:
+                path (str): the path of the file
+                user(str): the user logging in
+            """
             with open(path, 'r') as login_list:
                 for line in login_list:
                     if line.startswith("Username:"):
@@ -229,6 +268,8 @@ class ContactListApp:
                 return True
             
         def signup_save():
+            """Lets the user save the information they used during sign up
+            """
             username = self.username_signup_entry.get()
             password = self.password_signup_entry.get()
             
@@ -249,9 +290,13 @@ class ContactListApp:
         tk.Button(self.signup_window, text="Done", command=signup_save).pack()
 
     def run(self):
+        """Runs the main function
+        """
         self.root.mainloop()
 
     def add_contact(self):
+        """Adds contact to the Contact List
+        """
         add_contact_window = tk.Toplevel(self.root)
         add_contact_window.title("Add Contact")
         add_contact_window.geometry("300x300")
@@ -277,6 +322,8 @@ class ContactListApp:
         email_entry.pack()
 
         def save_contact():
+            """Saves the contact to the Contact List
+            """
             first_name = first_name_entry.get()
             last_name = last_name_entry.get()
             phone_number = phone_entry.get()
@@ -302,6 +349,8 @@ class ContactListApp:
         save_button.pack()
 
     def remove_contact(self):
+        """Removes contact off the Contact List
+        """
         remove_contact_window = tk.Toplevel(self.root)
         remove_contact_window.title("Remove Contact")
         remove_contact_window.geometry("300x200")
@@ -312,6 +361,8 @@ class ContactListApp:
         first_name_entry.pack()
 
         def remove():
+            """Removes contact from the Contact List
+            """
             first_name = first_name_entry.get()
             self.contact_list.remove_contact(first_name)
             remove_contact_window.destroy()
@@ -365,6 +416,8 @@ class ContactListApp:
 
 
     def run(self):
+        """Runs the main function
+        """
         self.root.mainloop()
 
 if __name__ == "__main__":
