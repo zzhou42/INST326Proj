@@ -101,8 +101,8 @@ class Contact:
         return self.email
 
 class ContactList:
-     """A class which stores attributes relating to an Contact List  
-    """
+    #A class which stores attributes relating to an Contact List
+     
     def __init__(self):
         """Initializes an Contact List object
     
@@ -139,11 +139,7 @@ class ContactList:
         return self.contacts.values()
 
 class ContactListApp:
-     """A class which stores attributes relating to an Contact List App 
-    
-    Attributes:
-            root (str): the top level directory of the Contact List App 
-    """
+     
         
     def __init__(self, root):
         """Initializes an Contact List App object
