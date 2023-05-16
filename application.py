@@ -13,35 +13,12 @@ will allow users to have an organized database of their contacts,
 allowing users to not have to frantically look for a specific contact. 
 They would have all their contact information with a click of a few buttons.
 
-Challenges Encountered: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Clicking the Login button multiple times causes duplication of the contact 
-buttons. Find a way to not let that happen, either create a separate window
-for the ContactListApp, or prevent the use of login button when sucessfully
-logged in.
-- Fix and polish up the ContactListApp, the show_contacts() function needs to be
-polished. The printed out contacts list needs to be readable.  COMPLETED
-- Connect a separate contact list per login user. So if we have 3 users logins
-we need 3 separate contact list. We can ditch this if it is too complicated.
-Probably talk to TA or Professor about this.
-- Organization, this version of code is not optimized and was just me splurging
-and testing the limits of tkinter.
-- Figure out how to properly use Toplevel() function, or ways to open up multiple
-windows and better organize them or visualize them first
-- I like Chima's classes he made, Try to modify the GUI aspect of the code with
-Chima's classes that he created. Should discuss together.
+Program runs from terminal. python application .py
 
-5.11.23 Update
-- Realized that our contacts were not being saved to the user even though we had
-the logins of users saved. Need to figure out a way to implement this
+Program opens GUI where a user will sign up, then proceed to add desired contacts
 
-Code Version: 5.11.23 (Date Last Updated)
-
-- Lets contribuite soley on the Main Code instead of making our own versions
-We also need to implement a way for users to log out and log in using same username and password without destroying application.
-
-"""
-"""
-Start of Main Code"""
+Biblography - https://docs.python.org/3/library/tkinter.html
+start of Main Code"""
 import tkinter as tk
 from tkinter import messagebox
 
@@ -371,26 +348,6 @@ class ContactListApp:
     def show_contacts(self):
         contacts = self.contact_list.get_all_contacts()
         
-        #path = 'login_list.txt'
-        
-        #def owner_check(path, username):
-        #    contacts = []
-        #    with open(path, 'r') as contact_list:
-        #        contact_content = contact_list.read()
-        #        contact_entries = contact_content.split("End Contact\n")
-        #        for contact in contact_entries:
-        #            if f"Contact of {username}" in contact:
-        #                lines = contact.strip().split("\n")
-        #                contact = {}
-        #                for line in lines:
-        #                    if ":" in line:
-        #                       key, value = line.split(":")
-        #                       contact[key.strip()] = value.strip()
-        #                contacts.append(contact)
-        #    print(contacts)
-        #    return contacts
-        
-        #contacts = owner_check(path, username)
 
         if not contacts:
             messagebox.showinfo("Contact List", "No contacts to show")
