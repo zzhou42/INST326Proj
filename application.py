@@ -369,6 +369,11 @@ class ContactListApp:
   
    
     def show_contacts(self):
+        """Shows the user all the contacts that is available to them 
+    
+            Returns:
+                (str): returns a representation of the contact list 
+        """
         contacts = self.contact_list.get_all_contacts()
         
         #path = 'login_list.txt'
@@ -417,6 +422,10 @@ class ContactListApp:
         self.root.mainloop()
 
 if __name__ == "__main__":
+    #If name == main statements are statements that basically ask:
+    #Is the current script being run natively or as a module?
+    #It the script is being run as a module, the block of code under this will not be executed.
+    #If the script is being run natively, the block of code below this will be executed.
     root = tk.Tk()
     app = ContactListApp(root)
     app.run()
